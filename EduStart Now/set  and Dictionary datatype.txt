@@ -1,0 +1,32 @@
+set data type:
+1.Set data type is a mutable data type
+2.It is a unordered collection of elements
+3.It takes only non  repeatative elements
+4.It will allow only immutable data types to pass 
+
+add
+remove
+discard
+update
+pop
+union
+intersection
+difference
+symmetric_difference
+
+
+1.Dictionary:
+
+1.Dictionary is a key-value pair
+2.It is a mutable data type
+3.every key-value pair is called as item 
+4.Dictionary keys should be immutabe, but values can be both mutable and immutable
+5.unordered 
+6.Duplicate elements can be allowed for values but for keys not allowed.
+
+
+
+a=set() ---- empty set
+
+d={1:"nikhil",2:"raj"}
+
