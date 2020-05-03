@@ -1,0 +1,159 @@
+From e37e17f0381d979bf08d7acd7a1d21f19334105c Mon Sep 17 00:00:00 2001
+From: HeroicHitesh <hiteshkumar_1mv17cs042@sirmvit.edu>
+Date: Sat, 18 Apr 2020 11:36:13 +0530
+Subject: [PATCH] Create Patch File
+
+---
+ 0001-Create-Patch-File.patch       |  77 +++++++++++++++++++++++++++++
+ __pycache__/client3.cpython-37.pyc | Bin 0 -> 1132 bytes
+ client_test.py                     |  23 +++++++++
+ 3 files changed, 100 insertions(+)
+ create mode 100644 0001-Create-Patch-File.patch
+ create mode 100644 __pycache__/client3.cpython-37.pyc
+
+diff --git a/0001-Create-Patch-File.patch b/0001-Create-Patch-File.patch
+new file mode 100644
+index 0000000..0d788f7
+--- /dev/null
++++ b/0001-Create-Patch-File.patch
+@@ -0,0 +1,77 @@
++From 0960a91542d2c4d4ceacd7f6897fd028493a7704 Mon Sep 17 00:00:00 2001
++From: HeroicHitesh <hiteshkumar_1mv17cs042@sirmvit.edu>
++Date: Sat, 18 Apr 2020 11:07:05 +0530
++Subject: [PATCH] Create Patch File
++
++---
++ client3.py     | 10 +++++++---
++ client_test.py |  6 +++++-
++ 2 files changed, 12 insertions(+), 4 deletions(-)
++
++diff --git a/client3.py b/client3.py
++index f1771c3..bffe822 100644
++--- a/client3.py
+++++ b/client3.py
++@@ -35,14 +35,16 @@ def getDataPoint(quote):
++ 	stock = quote['stock']
++ 	bid_price = float(quote['top_bid']['price'])
++ 	ask_price = float(quote['top_ask']['price'])
++-	price = bid_price
+++	price = (bid_price + ask_price) / 2
++ 	return stock, bid_price, ask_price, price
++ 
++ def getRatio(price_a, price_b):
++ 	""" Get ratio of price_a and price_b """
++ 	""" ------------- Update this function ------------- """
++ 	""" Also create some unit tests for this function in client_test.py """
++-	return 1
+++	if price_b == 0:
+++		return
+++	return price_a / price_b
++ 
++ # Main
++ if __name__ == "__main__":
++@@ -52,8 +54,10 @@ if __name__ == "__main__":
++ 		quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
++ 
++ 		""" ----------- Update to get the ratio --------------- """
+++		prices = {}
++ 		for quote in quotes:
++ 			stock, bid_price, ask_price, price = getDataPoint(quote)
+++			prices[stock] = price
++ 			print ("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
++ 
++-		print ("Ratio %s" % getRatio(price, price))
+++		print ("Ratio %s" % getRatio(prices['ABC'], prices['DEF']))
++diff --git a/client_test.py b/client_test.py
++index af2bf26..e9fea9a 100644
++--- a/client_test.py
+++++ b/client_test.py
++@@ -1,5 +1,5 @@
++ import unittest
++-from client3 import getDataPoint
+++from client3 import getDataPoint, getRatio
++ 
++ class ClientTest(unittest.TestCase):
++   def test_getDataPoint_calculatePrice(self):
++@@ -8,6 +8,8 @@ class ClientTest(unittest.TestCase):
++       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
++     ]
++     """ ------------ Add the assertion below ------------ """
+++    for quote in quotes:
+++      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price']) / 2))
++ 
++   def test_getDataPoint_calculatePriceBidGreaterThanAsk(self):
++     quotes = [
++@@ -15,6 +17,8 @@ class ClientTest(unittest.TestCase):
++       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
++     ]
++     """ ------------ Add the assertion below ------------ """
+++    for quote in quotes:
+++      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price']) / 2))
++ 
++ 
++   """ ------------ Add more unit tests ------------ """
++-- 
++2.23.0
++
+diff --git a/__pycache__/client3.cpython-37.pyc b/__pycache__/client3.cpython-37.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..44e49004279fed581b29049d54b4f2525fe0c8ef
+GIT binary patch
+literal 1132
+zcmYjQOK;pZ5GEx`tF?C%*Y9mEY=IzMppIPRVi;+f#7+wosNp0Cf)Hs1S)8?HYbBZF
+z7RhFP+5)|_f1s!Ju|K7k9(v@pr`&t$sUxl(l*GKq(QxLQ(c^A+f#CY%*WZ5lxlPF5
+zjd8uuCJ&MHU&thpv><{y=?TwCU-(Wk!K5bw>5EV@8T>><ONO$AGJ>{@&OG(!n_pl7
+z79pI{DcvXEPecd&Sr_Q(joD2IW=p_k?2=s4OFH|gkzzR~V&%;aETi|fScMj>PU&kV
+z*2KEl5Sy?GE3kH-Ku@+|4c1`;HV15-OerPjlb6l;0z|MP7kdPGr$?sV)$PGctmQfB
+zci&@O<Y4^Ci81wV92ZrV7AKW9yF1%E+wu7b)Z4Fe`Q^Kd{2xk4hU8X&oFVNY>4(TB
+z7_UbzsA)8>N2HIh(F@Pn?1Sx3yotX-WN?dIunBFf2^%oXBpmPZLsiL920SeaUJbZ8
+z0bT+~ko?EA7=h-d;>S>eN)0-3nVPh&^3re{Xj5fpwq>e1Im)FCYL#a&w^M!g-oq68
+z)CPm1N=-ko!TG2%pqgXb#t)LYe;a-0s%onHov1|=|2~ReXiz#%>$-q=AM_c%6KB;(
+zY0&X$J<Q^755L>nGLW5Y8H};@#n$1gdvR9eP?~#p>$kRZ3}zqmJ#_hEQ0<1!kLVKa
+z4pm(|%bI+e)yRe%ysM~8sH8YT9qBzsfG6}8LCE~^r~Df*9O1~T1~6AdlJc~aSNaiG
+zP0J2k9evNXu3WB_BX==p9dxu2=J~9N*GEf-$OwxlqiV_BCdn|(%On}!dD;Ld`EAWp
+z!#_g^cW>*@Io9r^dj_@sIC9a@&-#xZ?^%EU$=Cgl#f_0Fiu~xV0vs`IL^!uCGx-n%
+zJJnSwLWOlyLlHcE@#NVnOAj1I9}+3kAtZ@qIrh;8=z9#7CN{thOD$U0ky{wKs-d*u
+zpi;xsSf(JAHgp4^Md&isD#G&IIH=~AS50%=2)Icq&HrF(CPK}zx<ABuE#Sc#9%+s&
+YqHg=lXI|9C?JraAGrE91j_9WMACKrFA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/client_test.py b/client_test.py
+index e9fea9a..42ba6d5 100644
+--- a/client_test.py
++++ b/client_test.py
+@@ -22,7 +22,30 @@ class ClientTest(unittest.TestCase):
+ 
+ 
+   """ ------------ Add more unit tests ------------ """
++  def test_getRatio_priceBZero(self):
++    price_a = 119.2
++    price_b = 0
++    self.assertIsNone(getRatio(price_a, price_b))
++ 
++  def test_getRatio_priceAZero(self):
++    price_a = 0
++    price_b = 121.68
++    self.assertEqual(getRatio(price_a, price_b), 0)
++ 
++  def test_getRatio_greaterThan1(self):
++    price_a = 346.48
++    price_b = 166.39
++    self.assertGreater(getRatio(price_a, price_b), 1)
+ 
++  def test_getRatio_LessThan1(self):
++    price_a = 166.39
++    price_b = 356.48
++    self.assertLess(getRatio(price_a, price_b), 1)
++
++  def test_getRatio_exactlyOne(self):
++    price_a = 356.48
++    price_b = 356.48
++    self.assertEqual(getRatio(price_a, price_b), 1)
+ 
+ 
+ if __name__ == '__main__':
+-- 
+2.23.0
+
