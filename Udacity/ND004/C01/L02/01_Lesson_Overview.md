@@ -1,4 +1,4 @@
-**Topics to be covered**
+## Topics to be covered ##
 
 1. **Interacting with a (remote) database** :
 
