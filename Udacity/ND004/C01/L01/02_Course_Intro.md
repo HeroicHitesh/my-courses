@@ -1,4 +1,4 @@
-Some of the specific core concepts we'll cover:
+**Some of the specific core concepts we'll cover:**
 
 - How to do Create, Read, Update, and Delete (CRUD) operations
 - How to apply these operations across both databases and web applications
