@@ -1,4 +1,4 @@
-**Required Software**
+## Required Software ##
 
 Before getting started, let's make sure you have all the needed software installed. They are:
 - ***A Command-Line Interface (CLI)*** like Terminal or GitBash.
