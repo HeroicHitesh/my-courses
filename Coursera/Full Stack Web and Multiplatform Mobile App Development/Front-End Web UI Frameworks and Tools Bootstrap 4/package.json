@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.27.11",
     "cssmin": "^0.4.3",
     "del": "^3.0.0",
     "grunt": "^1.5.3",
@@ -30,7 +30,7 @@
     "grunt-contrib-cssmin": "^2.2.1",
     "grunt-contrib-htmlmin": "^2.4.0",
     "grunt-contrib-imagemin": "^2.0.1",
-    "grunt-contrib-watch": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-filerev": "^2.3.1",
     "grunt-sass": "^2.1.0",
     "grunt-usemin": "^3.1.1",
